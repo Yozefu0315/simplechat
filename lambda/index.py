@@ -4,7 +4,9 @@ import os
 import boto3
 import re  # 正規表現モジュールをインポート
 from botocore.exceptions import ClientError
+import urllib.request
 
+url = "https://105d-34-60-223-119.ngrok-free.app"
 
 # Lambda コンテキストからリージョンを抽出する関数
 def extract_region_from_arn(arn):
