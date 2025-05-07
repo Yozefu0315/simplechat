@@ -7,7 +7,7 @@ from botocore.exceptions import ClientError
 import urllib.request
 
 # FastAPI URL
-FASTAPI_URL = "https://7fae-34-143-222-152.ngrok-free.app/docs"
+FASTAPI_URL = "https://7fae-34-143-222-152.ngrok-free.app"
 
 # Lambda コンテキストからリージョンを抽出する関数
 def extract_region_from_arn(arn):
