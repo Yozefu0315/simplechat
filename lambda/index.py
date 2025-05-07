@@ -6,7 +6,8 @@ import re  # 正規表現モジュールをインポート
 from botocore.exceptions import ClientError
 import urllib.request
 
-url = "https://105d-34-60-223-119.ngrok-free.app"
+# FastAPI URL
+FASTAPI_URL = "https://7fae-34-143-222-152.ngrok-free.app/docs"
 
 # Lambda コンテキストからリージョンを抽出する関数
 def extract_region_from_arn(arn):
@@ -46,6 +47,21 @@ def lambda_handler(event, context):
         
         print("Processing message:", message)
         print("Using model:", MODEL_ID)
+
+        #　FastAPI呼び出し処理
+        try:
+            fastapi_payload = json.dumps({"text": message}).encode("utf-8")
+            req = urllib.request.Request(
+                url=FASTAPI_URL,
+                data=fastapi_payload,
+                headers={"Content-Type": "application/json"},
+                method="POST"
+            )
+            with urllib.request.urlopen(req) as res:
+                fastapi_response = json.loads(res.read().decode("utf-8"))
+            assistant_response = fastapi_response["response"]
+        except Exception as fastapi_error:
+            raise Exception(f"FastAPI呼び出し失敗: {fastapi_error}") 
         
         # 会話履歴を使用
         messages = conversation_history.copy()
