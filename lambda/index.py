@@ -6,7 +6,7 @@ import re
 from botocore.exceptions import ClientError
 import urllib.request
 
-FASTAPI_URL = "https://7fae-34-143-222-152.ngrok-free.app/predict"  # ← /predict を忘れずに！
+FASTAPI_URL = "https://7fae-34-143-222-152.ngrok-free.app"
 
 def extract_region_from_arn(arn):
     match = re.search('arn:aws:lambda:([^:]+):', arn)
